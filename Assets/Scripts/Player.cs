@@ -61,6 +61,7 @@ public class Player : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.gameObject.CompareTag("ScoreZone")) {
+            Destroy(other.gameObject);
             GameManager gm = FindObjectOfType<GameManager>();
             gm.IncreaseScore();
         }

@@ -7,6 +7,13 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float leftEdge;
+
+    private bool canDash = true;
+    private bool isDashing;
+    private float dashingPower = 20f;
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 5f;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,6 +30,16 @@ public class Player : MonoBehaviour
             rb.gravityScale *= -1;
         }
 
+        if (Input.GetKeyDown(KeyCode.D) && canDash) {
+            StartCoroutine(Dash("right"));
+        } else if (Input.GetKeyDown(KeyCode.A) && canDash) {
+            StartCoroutine(Dash("left"));
+        } else if (Input.GetKeyDown(KeyCode.W) && canDash) {
+            StartCoroutine(Dash("up"));
+        } else if (Input.GetKeyDown(KeyCode.S) && canDash) {
+            StartCoroutine(Dash("down"));
+        } 
+
         if (transform.position.x < leftEdge) {
             SceneManager.LoadScene("SampleScene");
         }
@@ -34,5 +51,35 @@ public class Player : MonoBehaviour
             GameManager gm = FindObjectOfType<GameManager>();
             gm.IncreaseScore();
         }
+    }
+
+    private IEnumerator Dash(string dir)
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+
+        switch (dir) {
+            case "right":
+                rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+                break;
+            case "left":
+                rb.velocity = new Vector2(transform.localScale.x * dashingPower * -1, 0f);
+                break;
+            case "up":
+                rb.velocity = new Vector2(0f, transform.localScale.x * dashingPower);
+                break;
+            case "down":
+                rb.velocity = new Vector2(0f, transform.localScale.x * dashingPower * -1);
+                break;
+        }
+
+        yield return new WaitForSeconds(dashingTime);
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        rb.velocity = new Vector2(0, 0f);
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
 }

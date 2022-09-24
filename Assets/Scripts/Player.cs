@@ -16,4 +16,12 @@ public class Player : MonoBehaviour
             rb.gravityScale *= -1;
         }
     }
+
+    void OnTriggerEnter2D(Collider2D other) 
+    {
+        if (other.gameObject.CompareTag("ScoreZone")) {
+            GameManager gm = FindObjectOfType<GameManager>();
+            gm.IncreaseScore();
+        }
+    }
 }

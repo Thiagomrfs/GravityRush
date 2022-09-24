@@ -5,11 +5,11 @@ using UnityEngine;
 public class ObstacleMovement : MonoBehaviour
 {
     private float leftEdge;
-    public float speed = 5f;
+    public float speed = 7f;
 
     private void Start()
     {
-        leftEdge = Camera.main.ScreenToWorldPoint(Vector3.zero).x - 1f;
+        leftEdge = Camera.main.ScreenToWorldPoint(Vector3.zero).x - 1.5f;
     }
 
     void Update()

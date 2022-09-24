@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject prefab;
+    public GameObject[] prefabs;
     public GameObject ceilingPos;
     public GameObject groundPos;
     public float spawnRate = 1f;
@@ -21,16 +21,14 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
-        float pos = Random.Range(1, 3);
-        float height = Random.Range(7, 16);
+        int pos = Random.Range(1, 3);
+        int obstacleType = Random.Range(0, prefabs.Length);
         GameObject obstacle;
         
         if (pos == 1) {
-            obstacle = Instantiate(prefab, ceilingPos.transform.position, Quaternion.identity);
+            obstacle = Instantiate(prefabs[obstacleType], ceilingPos.transform.position, Quaternion.identity);
         } else {
-            obstacle = Instantiate(prefab, groundPos.transform.position, Quaternion.identity);
+            obstacle = Instantiate(prefabs[obstacleType], groundPos.transform.position, Quaternion.identity);
         }
-        
-        obstacle.transform.localScale = new Vector3(1, height, 1);
     }
 }

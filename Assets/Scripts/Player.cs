@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     private float leftEdge;
 
     private bool canDash = true;
-    private bool isDashing;
     private float dashingPower = 20f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 5f;
@@ -56,9 +55,9 @@ public class Player : MonoBehaviour
     private IEnumerator Dash(string dir)
     {
         canDash = false;
-        isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
+        GetComponent<SpriteRenderer>().color = new Color(0.2039215f, 0.2511322f, 0.8196079f);
 
         switch (dir) {
             case "right":
@@ -77,9 +76,9 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSeconds(dashingTime);
         rb.gravityScale = originalGravity;
-        isDashing = false;
         rb.velocity = new Vector2(0, 0f);
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+        GetComponent<SpriteRenderer>().color = new Color(0.8207547f, 0.240032f, 0.2051887f);
     }
 }

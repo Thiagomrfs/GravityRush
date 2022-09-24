@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     private float dashingTime = 0.2f;
     private float dashingCooldown = 5f;
 
+    private bool canExplode = false;
+    private float explosionCooldown = 20f;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -21,6 +24,13 @@ public class Player : MonoBehaviour
     private void Start()
     {
         leftEdge = Camera.main.ScreenToWorldPoint(Vector3.zero).x - 1f;
+        StartCoroutine(IntialExplosionCD());
+    }
+
+    private IEnumerator IntialExplosionCD() {
+        yield return new WaitForSeconds(explosionCooldown);
+        canExplode = true;
+        GetComponent<ParticleSystem>().Play(false);
     }
 
     void Update()
@@ -38,6 +48,10 @@ public class Player : MonoBehaviour
         } else if (Input.GetKeyDown(KeyCode.S) && canDash) {
             StartCoroutine(Dash("down"));
         } 
+
+        if (Input.GetKeyDown(KeyCode.F) && canExplode) {
+            StartCoroutine(Explode());
+        }
 
         if (transform.position.x < leftEdge) {
             SceneManager.LoadScene("SampleScene");
@@ -80,5 +94,29 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
         GetComponent<SpriteRenderer>().color = new Color(0.8207547f, 0.240032f, 0.2051887f);
+    }
+
+    private IEnumerator Explode()
+    {
+        ParticleSystem ps = GetComponent<ParticleSystem>();
+        ParticleSystem explosion = transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
+
+        canExplode = false;
+        ps.Stop(false);
+        explosion.Play(false);
+
+        yield return new WaitForSeconds(0.3f);
+        ObstacleMovement[] obstacles = FindObjectsOfType<ObstacleMovement>();
+        foreach(ObstacleMovement obs in obstacles)
+        {
+            Destroy(obs.gameObject);
+        }
+
+        yield return new WaitForSeconds(explosionCooldown);
+
+        ps.Play(false);
+        explosion.Stop(false);
+        yield return new WaitForSeconds(1f);
+        canExplode = true;
     }
 }

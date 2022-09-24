@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        leftEdge = Camera.main.ScreenToWorldPoint(Vector3.zero).x - 1f;
+        leftEdge = Camera.main.ScreenToWorldPoint(Vector3.zero).x - 0.5f;
         StartCoroutine(IntialExplosionCD());
     }
 

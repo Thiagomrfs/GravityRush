@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     private float dashingCooldown = 5f;
 
     private bool canExplode = false;
-    private float explosionCooldown = 20f;
+    private float explosionCooldown = 10f;
 
     void Awake()
     {

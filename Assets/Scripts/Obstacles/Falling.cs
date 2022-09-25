@@ -14,10 +14,10 @@ public class Falling : MonoBehaviour
         bottomEdge = Camera.main.ScreenToWorldPoint(Vector3.zero).y - 1.5f;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (falling && transform.position.y > bottomEdge) {
-            transform.position += Vector3.down * 9f * Time.deltaTime;
+            transform.position += Vector3.down * 9f * Time.fixedDeltaTime;
         }
     }
 

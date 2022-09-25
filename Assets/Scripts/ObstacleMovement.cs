@@ -12,9 +12,9 @@ public class ObstacleMovement : MonoBehaviour
         leftEdge = Camera.main.ScreenToWorldPoint(Vector3.zero).x - 1.5f;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        transform.position += Vector3.left * speed * Time.deltaTime;
+        transform.position += Vector3.left * speed * Time.fixedDeltaTime;
 
         if (transform.position.x < leftEdge) {
             Destroy(gameObject);

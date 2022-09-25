@@ -14,12 +14,12 @@ public class MovingHeight : MonoBehaviour
         StartCoroutine(HeightChange());
     }
     
-    void Update()
+    void FixedUpdate()
     {
         transform.localScale = Vector3.Lerp(
             transform.localScale, 
             new Vector3(1, height, 1), 
-            6f * Time.deltaTime
+            6f * Time.fixedDeltaTime
         );
     }
 

@@ -21,8 +21,19 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
+        GameManager gm = FindObjectOfType<GameManager>();
+
         int pos = Random.Range(1, 3);
-        int obstacleType = Random.Range(0, prefabs.Length);
+        int obstacleType;
+
+        if (gm.score <= 10) {
+            obstacleType = Random.Range(0, 1);
+        } else if (gm.score <= 20) {
+            obstacleType = Random.Range(0, 2);
+        } else {
+            obstacleType = Random.Range(0, prefabs.Length);
+        }
+
         GameObject obstacle;
         
         if (pos == 1) {

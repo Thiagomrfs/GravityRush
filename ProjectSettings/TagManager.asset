@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ScoreZone
   - Spawner
+  - Map
   layers:
   - Default
   - TransparentFX

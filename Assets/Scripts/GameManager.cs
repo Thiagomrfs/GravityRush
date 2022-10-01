@@ -31,7 +31,13 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(InvokeCoroutine());
     }
- 
+
+    private void Update()
+    {
+        if (state == GameState.waitingStart && Input.GetKeyDown(KeyCode.Space)) {
+            updateGameState(GameState.running);
+        }
+    }
     IEnumerator InvokeCoroutine()
     {
         yield return null;

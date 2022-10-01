@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private GameManager gm;
     private float leftEdge;
 
     private bool canDash = true;
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        gm = FindObjectOfType<GameManager>();
     }
 
     private void Start()
@@ -62,7 +64,6 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("ScoreZone")) {
             Destroy(other.gameObject);
-            GameManager gm = FindObjectOfType<GameManager>();
             gm.IncreaseScore();
         }
     }

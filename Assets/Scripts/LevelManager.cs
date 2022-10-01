@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour
                 waitStart();
                 break;
             case GameState.running:
+                startGame();
                 break;
             case GameState.dashEvent:
                 break;
@@ -40,10 +41,20 @@ public class LevelManager : MonoBehaviour
 
     private void waitStart()
     {
-        Transform a = canvas.transform.Find("Initial text");
         player.GetComponent<Rigidbody2D>().simulated = false;
+        player.GetComponent<Player>().enabled = false;
         spawner.enabled = false;
         map.transform.Find("Ground").GetComponent<Parallax>().enabled = false;
         map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = false;
+    }
+
+    private void startGame()
+    {
+        canvas.transform.Find("Initial text").gameObject.SetActive(false);
+        player.GetComponent<Rigidbody2D>().simulated = true;
+        player.GetComponent<Player>().enabled = true;
+        spawner.enabled = true;
+        map.transform.Find("Ground").GetComponent<Parallax>().enabled = true;
+        map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = true;
     }
 }

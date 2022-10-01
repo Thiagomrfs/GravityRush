@@ -95,11 +95,12 @@ public class Player : MonoBehaviour
     private IEnumerator Explode()
     {
         ParticleSystem ps = GetComponent<ParticleSystem>();
-        ParticleSystem explosion = transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
+        Transform explosion = GameObject.Find("VFX").transform.Find("Explosion");
 
         canExplode = false;
         ps.Stop(false);
-        explosion.Play(false);
+        explosion.position = transform.position;
+        explosion.gameObject.GetComponent<ParticleSystem>().Play(false);
 
         yield return new WaitForSeconds(0.3f);
         ObstacleMovement[] obstacles = FindObjectsOfType<ObstacleMovement>();
@@ -111,7 +112,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(explosionCooldown);
 
         ps.Play(false);
-        explosion.Stop(false);
+        explosion.gameObject.GetComponent<ParticleSystem>().Stop(false);
         yield return new WaitForSeconds(1f);
         canExplode = true;
     }

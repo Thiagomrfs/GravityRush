@@ -37,7 +37,7 @@ public class LevelManager : MonoBehaviour
                 startGame();
                 break;
             case GameState.dashEvent:
-                dashEvent();
+                StartCoroutine(dashEvent());
                 break;
             case GameState.explosionEvent:
                 explosionEvent();
@@ -64,13 +64,21 @@ public class LevelManager : MonoBehaviour
         map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = true;
     }
 
-    private void dashEvent()
+    private IEnumerator dashEvent()
     {
+        spawner.enabled = false;
+
+        yield return new WaitForSeconds(2f);
         StartCoroutine(lerpIn(
             cam.backgroundColor,
             new Color(0.7490196f, 0.8784314f, 0.7632619f),
-            50f
+            100f
         ));
+
+        yield return new WaitForSeconds(0.3f);
+        canvas.transform.Find("Dash text").gameObject.SetActive(true);
+        player.GetComponent<Rigidbody2D>().simulated = false;
+        player.GetComponent<Player>().enabled = false;
     }
 
     private void explosionEvent()

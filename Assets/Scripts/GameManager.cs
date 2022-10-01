@@ -17,8 +17,13 @@ public class GameManager : MonoBehaviour
         score++;
         scoreText.text = score.ToString();
 
-        if (score == 2) {
-            updateGameState(GameState.running);
+        switch (score) {
+            case 2:
+                updateGameState(GameState.dashEvent);
+                break;
+            case 5:
+                updateGameState(GameState.explosionEvent);
+                break;
         }
     }
     private void Awake()

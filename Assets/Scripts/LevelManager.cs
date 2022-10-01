@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     private Spawner spawner;
     private Canvas canvas;
     private GameObject map;
+    private Camera cam;
 
     private void Awake()
     {
@@ -16,6 +17,7 @@ public class LevelManager : MonoBehaviour
         spawner = FindObjectOfType<Spawner>();
         canvas = FindObjectOfType<Canvas>();
         map = GameObject.Find("Map");
+        cam = Camera.main;
     }
 
     private void OnDestroy()
@@ -33,8 +35,10 @@ public class LevelManager : MonoBehaviour
                 startGame();
                 break;
             case GameState.dashEvent:
+                dashEvent();
                 break;
             case GameState.explosionEvent:
+                explosionEvent();
                 break;
         }
     }
@@ -56,5 +60,15 @@ public class LevelManager : MonoBehaviour
         spawner.enabled = true;
         map.transform.Find("Ground").GetComponent<Parallax>().enabled = true;
         map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = true;
+    }
+
+    private void dashEvent()
+    {
+        
+    }
+
+    private void explosionEvent()
+    {
+
     }
 }

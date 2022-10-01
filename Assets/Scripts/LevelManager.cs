@@ -40,7 +40,7 @@ public class LevelManager : MonoBehaviour
                 StartCoroutine(dashEvent());
                 break;
             case GameState.explosionEvent:
-                explosionEvent();
+                StartCoroutine(explosionEvent());
                 break;
         }
     }
@@ -57,6 +57,8 @@ public class LevelManager : MonoBehaviour
     private void startGame()
     {
         canvas.transform.Find("Initial text").gameObject.SetActive(false);
+        canvas.transform.Find("Dash text").gameObject.SetActive(false);
+        canvas.transform.Find("Explosion text").gameObject.SetActive(false);
         player.GetComponent<Rigidbody2D>().simulated = true;
         player.GetComponent<Player>().enabled = true;
         spawner.enabled = true;
@@ -78,16 +80,26 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         canvas.transform.Find("Dash text").gameObject.SetActive(true);
         player.GetComponent<Rigidbody2D>().simulated = false;
-        player.GetComponent<Player>().enabled = false;
+        map.transform.Find("Ground").GetComponent<Parallax>().enabled = true;
+        map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = true;
     }
 
-    private void explosionEvent()
+    private IEnumerator explosionEvent()
     {
+        spawner.enabled = false;
+
+        yield return new WaitForSeconds(2f);
         StartCoroutine(lerpIn(
             cam.backgroundColor,
             new Color(0.8759063f, 0.8784314f, 0.7490196f),
             50f
         ));
+
+        yield return new WaitForSeconds(0.3f);
+        canvas.transform.Find("Explosion text").gameObject.SetActive(true);
+        player.GetComponent<Rigidbody2D>().simulated = false;
+        map.transform.Find("Ground").GetComponent<Parallax>().enabled = true;
+        map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = true;
     }
 
     private IEnumerator lerpIn(Color startColor, Color endColor, float fadeInTime)

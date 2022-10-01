@@ -42,6 +42,18 @@ public class GameManager : MonoBehaviour
         if (state == GameState.waitingStart && Input.GetKeyDown(KeyCode.Space)) {
             updateGameState(GameState.running);
         }
+
+        if (state == GameState.dashEvent) {
+            if (Input.GetKeyDown(KeyCode.D)) {
+                updateGameState(GameState.running);
+            } else if (Input.GetKeyDown(KeyCode.A)) {
+                updateGameState(GameState.running);
+            } else if (Input.GetKeyDown(KeyCode.W)) {
+                updateGameState(GameState.running);
+            } else if (Input.GetKeyDown(KeyCode.S)) {
+                updateGameState(GameState.running);
+            } 
+        }
     }
     
     IEnumerator InvokeCoroutine()

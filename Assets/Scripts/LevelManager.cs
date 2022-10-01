@@ -78,6 +78,7 @@ public class LevelManager : MonoBehaviour
         ));
 
         yield return new WaitForSeconds(0.3f);
+        player.unlockDash();
         canvas.transform.Find("Dash text").gameObject.SetActive(true);
         player.GetComponent<Rigidbody2D>().simulated = false;
         map.transform.Find("Ground").GetComponent<Parallax>().enabled = true;
@@ -96,6 +97,8 @@ public class LevelManager : MonoBehaviour
         ));
 
         yield return new WaitForSeconds(0.3f);
+        
+        player.unlockExplosion();
         canvas.transform.Find("Explosion text").gameObject.SetActive(true);
         player.GetComponent<Rigidbody2D>().simulated = false;
         map.transform.Find("Ground").GetComponent<Parallax>().enabled = true;

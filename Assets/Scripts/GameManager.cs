@@ -18,10 +18,10 @@ public class GameManager : MonoBehaviour
         scoreText.text = score.ToString();
 
         switch (score) {
-            case 2:
+            case 10:
                 updateGameState(GameState.dashEvent);
                 break;
-            case 5:
+            case 20:
                 updateGameState(GameState.explosionEvent);
                 break;
         }
@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         spawner = GameObject.FindWithTag("Spawner");
+        score = 15;
     }
 
     private void Start()

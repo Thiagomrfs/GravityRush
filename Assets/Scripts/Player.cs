@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     private GameManager gm;
     private float leftEdge;
 
-    private bool canDash = true;
+    private bool canDash = false;
     private float dashingPower = 20f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 5f;
@@ -26,14 +26,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         leftEdge = Camera.main.ScreenToWorldPoint(Vector3.zero).x - 0.5f;
-        StartCoroutine(IntialExplosionCD());
     }
 
-    private IEnumerator IntialExplosionCD() {
-        yield return new WaitForSeconds(explosionCooldown);
-        canExplode = true;
-        GetComponent<ParticleSystem>().Play(false);
-    }
 
     void Update()
     {
@@ -119,6 +113,15 @@ public class Player : MonoBehaviour
         ps.Play(false);
         explosion.Stop(false);
         yield return new WaitForSeconds(1f);
+        canExplode = true;
+    }
+
+    public void unlockDash() {
+        canDash = true;
+    }
+
+    public void unlockExplosion() {
+        GetComponent<ParticleSystem>().Play(false);
         canExplode = true;
     }
 }

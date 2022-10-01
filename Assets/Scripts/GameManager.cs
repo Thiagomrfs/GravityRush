@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         spawner = GameObject.FindWithTag("Spawner");
-        score = 15;
     }
 
     private void Start()

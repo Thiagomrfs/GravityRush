@@ -54,6 +54,10 @@ public class GameManager : MonoBehaviour
                 updateGameState(GameState.running);
             } 
         }
+
+        if (state == GameState.explosionEvent && Input.GetKeyDown(KeyCode.F)) {
+            updateGameState(GameState.running);
+        }
     }
     
     IEnumerator InvokeCoroutine()

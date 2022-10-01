@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
             updateGameState(GameState.running);
         }
     }
+    
     IEnumerator InvokeCoroutine()
     {
         yield return null;

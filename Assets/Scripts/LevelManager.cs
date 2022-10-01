@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     private Canvas canvas;
     private GameObject map;
     private Camera cam;
+    private GameManager gm;
 
     private void Awake()
     {
@@ -18,6 +19,7 @@ public class LevelManager : MonoBehaviour
         canvas = FindObjectOfType<Canvas>();
         map = GameObject.Find("Map");
         cam = Camera.main;
+        gm = FindObjectOfType<GameManager>();
     }
 
     private void OnDestroy()
@@ -64,11 +66,27 @@ public class LevelManager : MonoBehaviour
 
     private void dashEvent()
     {
-        
+        StartCoroutine(lerpIn(
+            cam.backgroundColor,
+            new Color(0.7490196f, 0.8784314f, 0.7632619f),
+            50f
+        ));
     }
 
     private void explosionEvent()
     {
+        StartCoroutine(lerpIn(
+            cam.backgroundColor,
+            new Color(0.8759063f, 0.8784314f, 0.7490196f),
+            50f
+        ));
+    }
 
+    private IEnumerator lerpIn(Color startColor, Color endColor, float fadeInTime)
+    {
+        for (float t = 0.01f; t < fadeInTime; t += 0.1f) {
+            cam.backgroundColor = Color.Lerp(startColor, endColor, t/fadeInTime);
+            yield return null;
+        }
     }
 }

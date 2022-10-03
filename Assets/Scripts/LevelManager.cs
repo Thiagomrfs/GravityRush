@@ -57,6 +57,7 @@ public class LevelManager : MonoBehaviour
     private void startGame()
     {
         canvas.transform.Find("Initial text").gameObject.SetActive(false);
+        canvas.transform.Find("Objective text").gameObject.SetActive(false);
         canvas.transform.Find("Dash text").gameObject.SetActive(false);
         canvas.transform.Find("Explosion text").gameObject.SetActive(false);
         player.GetComponent<Rigidbody2D>().simulated = true;

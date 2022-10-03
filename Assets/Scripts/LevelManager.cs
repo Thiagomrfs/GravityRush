@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour
                 StartCoroutine(explosionEvent());
                 break;
             case GameState.gameOver:
-                //codigo de game over
+                gameOver();
                 break;
         }
     }
@@ -85,8 +85,10 @@ public class LevelManager : MonoBehaviour
         player.unlockDash();
         canvas.transform.Find("Dash text").gameObject.SetActive(true);
         player.GetComponent<Rigidbody2D>().simulated = false;
-        map.transform.Find("Ground").GetComponent<Parallax>().enabled = true;
-        map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = true;
+        map.transform.Find("Ground").GetComponent<Parallax>().enabled = false;
+        map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = false;
+        // map.transform.Find("Ground").GetComponent<Parallax>().enabled = true;
+        // map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = true;
     }
 
     private IEnumerator explosionEvent()
@@ -105,8 +107,10 @@ public class LevelManager : MonoBehaviour
         player.unlockExplosion();
         canvas.transform.Find("Explosion text").gameObject.SetActive(true);
         player.GetComponent<Rigidbody2D>().simulated = false;
-        map.transform.Find("Ground").GetComponent<Parallax>().enabled = true;
-        map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = true;
+        map.transform.Find("Ground").GetComponent<Parallax>().enabled = false;
+        map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = false;
+        // map.transform.Find("Ground").GetComponent<Parallax>().enabled = true;
+        // map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = true;
     }
 
     private IEnumerator lerpIn(Color startColor, Color endColor, float fadeInTime)
@@ -115,5 +119,17 @@ public class LevelManager : MonoBehaviour
             cam.backgroundColor = Color.Lerp(startColor, endColor, t/fadeInTime);
             yield return null;
         }
+    }
+
+    private void gameOver() {
+        StartCoroutine(lerpIn(
+            cam.backgroundColor,
+            new Color(0.3773585f, 0.3773585f, 0.3773585f),
+            20f
+        ));
+        map.transform.Find("Ground").GetComponent<Parallax>().enabled = false;
+        map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = false;
+        spawner.enabled = false;
+        canvas.transform.Find("GameOverPanel").gameObject.SetActive(true);
     }
 }

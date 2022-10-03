@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
         }
 
         if (transform.position.x < leftEdge) {
-            SceneManager.LoadScene("SampleScene");
+            gm.updateGameState(GameState.gameOver);
         }
     }
 

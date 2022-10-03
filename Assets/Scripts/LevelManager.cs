@@ -42,6 +42,9 @@ public class LevelManager : MonoBehaviour
             case GameState.explosionEvent:
                 StartCoroutine(explosionEvent());
                 break;
+            case GameState.gameOver:
+                //codigo de game over
+                break;
         }
     }
 

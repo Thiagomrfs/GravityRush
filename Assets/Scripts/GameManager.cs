@@ -77,5 +77,6 @@ public enum GameState {
     waitingStart,
     running,
     dashEvent,
-    explosionEvent
+    explosionEvent,
+    gameOver
 }

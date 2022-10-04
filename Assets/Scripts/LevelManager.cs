@@ -45,6 +45,9 @@ public class LevelManager : MonoBehaviour
             case GameState.gameOver:
                 gameOver();
                 break;
+            case GameState.winGame:
+                winGame();
+                break;
         }
     }
 
@@ -87,8 +90,6 @@ public class LevelManager : MonoBehaviour
         player.GetComponent<Rigidbody2D>().simulated = false;
         map.transform.Find("Ground").GetComponent<Parallax>().enabled = false;
         map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = false;
-        // map.transform.Find("Ground").GetComponent<Parallax>().enabled = true;
-        // map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = true;
     }
 
     private IEnumerator explosionEvent()
@@ -109,8 +110,6 @@ public class LevelManager : MonoBehaviour
         player.GetComponent<Rigidbody2D>().simulated = false;
         map.transform.Find("Ground").GetComponent<Parallax>().enabled = false;
         map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = false;
-        // map.transform.Find("Ground").GetComponent<Parallax>().enabled = true;
-        // map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = true;
     }
 
     private IEnumerator lerpIn(Color startColor, Color endColor, float fadeInTime)
@@ -125,11 +124,23 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(lerpIn(
             cam.backgroundColor,
             new Color(0.3773585f, 0.3773585f, 0.3773585f),
-            20f
+            40f
         ));
         map.transform.Find("Ground").GetComponent<Parallax>().enabled = false;
         map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = false;
         spawner.enabled = false;
         canvas.transform.Find("GameOverPanel").gameObject.SetActive(true);
+    }
+
+    private void winGame() {
+        StartCoroutine(lerpIn(
+            cam.backgroundColor,
+            new Color(0.487184f, 0.8679245f, 0.5010607f),
+            40f
+        ));
+        map.transform.Find("Ground").GetComponent<Parallax>().enabled = false;
+        map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = false;
+        spawner.enabled = false;
+        canvas.transform.Find("WinGamePanel").gameObject.SetActive(true);
     }
 }

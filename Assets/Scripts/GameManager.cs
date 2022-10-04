@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
             case 20:
                 updateGameState(GameState.explosionEvent);
                 break;
+            case 80:
+                updateGameState(GameState.winGame);
+                break;
         }
     }
     private void Awake()
@@ -78,5 +81,6 @@ public enum GameState {
     running,
     dashEvent,
     explosionEvent,
-    gameOver
+    gameOver,
+    winGame
 }

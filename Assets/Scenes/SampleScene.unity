@@ -545,8 +545,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 949, y: 400.19}
-  m_SizeDelta: {x: 336.08, y: 69.62}
+  m_AnchoredPosition: {x: 761.49, y: 420}
+  m_SizeDelta: {x: 255.07, y: 69.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &365924203
 MonoBehaviour:
@@ -591,7 +591,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 365924204}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 930633431}
+        m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
+        m_MethodName: quitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &365924204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5902,7 +5914,7 @@ Canvas:
   m_GameObject: {fileID: 901993926}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

@@ -62,6 +62,7 @@ public class LevelManager : MonoBehaviour
 
     private void startGame()
     {
+        canvas.transform.Find("QuitButton").gameObject.SetActive(false);
         canvas.transform.Find("Initial text").gameObject.SetActive(false);
         canvas.transform.Find("Objective text").gameObject.SetActive(false);
         canvas.transform.Find("Dash text").gameObject.SetActive(false);
@@ -130,6 +131,7 @@ public class LevelManager : MonoBehaviour
         map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = false;
         spawner.enabled = false;
         canvas.transform.Find("GameOverPanel").gameObject.SetActive(true);
+        canvas.transform.Find("QuitButton").gameObject.SetActive(true);
     }
 
     private void winGame() {
@@ -142,5 +144,6 @@ public class LevelManager : MonoBehaviour
         map.transform.Find("Ceiling").GetComponent<Parallax>().enabled = false;
         spawner.enabled = false;
         canvas.transform.Find("WinGamePanel").gameObject.SetActive(true);
+        canvas.transform.Find("QuitButton").gameObject.SetActive(true);
     }
 }

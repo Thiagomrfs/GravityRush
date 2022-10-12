@@ -44,6 +44,7 @@ public class LevelManager : MonoBehaviour
                 break;
             case GameState.gameOver:
                 gameOver();
+                StopAllCoroutines();
                 break;
             case GameState.winGame:
                 winGame();

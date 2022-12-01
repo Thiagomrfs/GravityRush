@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class MovingHeight : MonoBehaviour
 {
-    private float min = 6;
-    private float max = 16;
     private float height;
     void Start()
     {
-        height = Random.Range(min, max);
+        height = Random.Range(1f, 2.8f);
         transform.localScale = new Vector3(1, height, 1);
         StartCoroutine(HeightChange());
     }
@@ -26,7 +24,7 @@ public class MovingHeight : MonoBehaviour
     private IEnumerator HeightChange()
     {
         yield return new WaitForSeconds(1);
-        height = Random.Range(min, max);
+        height = Random.Range(1f, 3f);
         StartCoroutine(HeightChange());
     }
 }

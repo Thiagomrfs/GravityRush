@@ -8,7 +8,7 @@ public class Falling : MonoBehaviour
     private float bottomEdge;
     void Start()
     {
-        float height = Random.Range(8, 16);
+        float height = Random.Range(1f, 3f);
         transform.localScale = new Vector3(1, height, 1);
         StartCoroutine(Fall());
         bottomEdge = Camera.main.ScreenToWorldPoint(Vector3.zero).y - 1.5f;
